@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Morning Baby</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('romantic-bg.gif') no-repeat center center/cover;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            background: rgba(255, 182, 193, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.5);
+        }
+        .heart {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #ff1a1a, #ff6666);
+            position: absolute;
+            transform: rotate(-45deg);
+            animation: heartbeat 1s infinite;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.5);
+        }
+        .heart:before, .heart:after {
+            content: "";
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #ff1a1a, #ff6666);
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.5);
+        }
+        .heart:before {
+            top: -60px;
+            left: 0;
+        }
+        .heart:after {
+            left: 60px;
+            top: 0;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1) rotate(-45deg); }
+            50% { transform: scale(1.3) rotate(-45deg); }
+            100% { transform: scale(1) rotate(-45deg); }
+        }
+        .heart-text {
+            margin-top: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #b30000;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .floating-heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: red;
+            opacity: 0.7;
+            clip-path: path('M24 38s-8-9-14-15S0 14 0 7s7-7 7-7 5 1 9 5c4-4 9-5 9-5s7 0 7 7-5 9-10 16-14 15-14 15z');
+            animation: float 5s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2);
+                opacity: 0;
+            }
+        }
+        .play-btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts"></div>
+    <div class="container">
+        <h1>OE CHAMAKCHALO, Good Morning! ☀️❤️</h1>
+        <p class="poem">Rise and shine, my love so true,<br> 
+        The sun smiles brighter just for you.<br>
+        Though the day may test your grace,<br>
+        My love will always hold its place. ❤️</p>
+        <p class="love-note">SUNO CHUHIYA<br>
+            Meri aakhon ke saamne tera chehra ho,<br>
+            Tere chehre par mera pehra ho,<br>
+            Tera mera sath ho khuda kare<br>
+            Ki yeh ishq samandar se bhi gehra ho. 💖
+        </p>
+        <div class="heart"></div>
+        <p class="heart-text">AMP'S DEN AYE SPM?</p>
+        
+        <p class="love-note">I know it's that time, but remember—you are strong, beautiful, and loved. Always! 💖</p>
+        
+        <p class="love-u">Love you, baby! 😘</p>
+        
+        <audio id="bg-music" autoplay>
+            <source src="2.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <button id="play-btn" class="play-btn">Play Music 🎵</button>
+    </div>
+    <script>
+        function createHearts() {
+            const heartContainer = document.querySelector('.floating-hearts');
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                heartContainer.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }
+        }
+        setInterval(createHearts, 1000);
+
+        // Audio autoplay fix
+        document.addEventListener("DOMContentLoaded", function () {
+            let audio = document.getElementById("bg-music");
+            let playButton = document.getElementById("play-btn");
+
+            audio.play().catch(() => {
+                // If autoplay is blocked, show the play button
+                playButton.style.display = "block";
+            });
+
+            playButton.addEventListener("click", function () {
+                audio.play();
+                playButton.style.display = "none"; // Hide button after playing
+            });
+        });
+    </script>
+</body>
+</html>
